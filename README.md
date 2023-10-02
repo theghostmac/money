@@ -1,2 +1,2 @@
 # money
-a library for handling fiat currencies in Golang
+A library for handling fiat currencies in Golang
