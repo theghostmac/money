@@ -58,3 +58,19 @@ func NewCurrency(code string) *Currency {
 func GetCurrencyByCode(code string) *Currency {
 	return AllCurrencies.CurrencyByCode(code)
 }
+
+func (c *Currency) Get() *Currency {
+	if currency, ok := AllCurrencies[c.Code]; ok {
+		return currency
+	}
+	return c.GetDefault()
+}
+
+func (c *Currency) GetDefault() *Currency {
+	return &Currency{
+		Code:     "",
+		Name:     "",
+		Symbol:   "",
+		Decimals: 2,
+	}
+}
