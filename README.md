@@ -1,12 +1,12 @@
-# money
-A library for handling fiat currencies in Golang. Currently, it supports the:
+# Currency Library for Go
+
+The Currency library is a Go package for working with monetary 
+values and currencies. It provides functionality for 
+managing currencies, performing arithmetic operations with 
+monetary values, and formatting currency amounts. Currently, it supports the:
 - USD
 - NGN
 - EUR
-
-# Currency Library for Go
-
-The Currency library is a Go package for working with monetary values and currencies. It provides functionality for managing currencies, performing arithmetic operations with monetary values, and formatting currency amounts.
 
 # To-do
 - [ ] Add Currency Conversion logic
