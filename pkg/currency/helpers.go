@@ -44,11 +44,7 @@ func (f *Formatter) Abs(amount Amount) Amount {
 }
 
 var (
-	UnmarshallJSON = defaultUnMarshallJSON
-	MarshallJSON   = defaultMarshallJSON
-
 	ErrorCurrencyMisMatch = errors.New("Currencies do not match")
-
 	InvalidJSONUnmarshall = errors.New("Invalid JSON marshal")
 )
 
