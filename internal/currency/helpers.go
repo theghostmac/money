@@ -52,7 +52,7 @@ var (
 	InvalidJSONUnmarshall = errors.New("Invalid JSON marshal")
 )
 
-func DefaultJSONMarshalling(m *Money, b []byte) error {
+func defaultUnMarshallJSON(m *Money, b []byte) error {
 	data := make(map[string]interface{})
 	err := json.Unmarshal(b, &data)
 	if err != nil {
@@ -79,13 +79,32 @@ func DefaultJSONMarshalling(m *Money, b []byte) error {
 	if amount == 0 && currency == "" {
 		ref = &Money{}
 	} else {
-		ref = New(Amount, currency)
+		ref = New(int64(amount), currency)
+	}
+
+	*m = *ref
+	return nil
+}
+
+func New(amount Amount, code string) *Money {
+	return &Money{
+		Amount:   amount,
+		Currency: NewCurrency(code).Get(),
 	}
 }
 
-func New(amount Amount, currency string) *Money {
-	return &Money{
-		Amount:   amount,
-		Currency: *NewCurrency(code).Get(),
+func defaultMarshallJSON(m *Money) ([]byte, error) {
+	if m == nil || m.Currency == nil {
+		return nil, errors.New("Money or Currency is nil")
 	}
+
+	data := struct {
+		Amount   Amount `json:"amount"`
+		Currency string `json:"currency"`
+	}{
+		Amount:   m.Amount,
+		Currency: m.Currency.Code,
+	}
+
+	return json.Marshal(data)
 }
