@@ -86,13 +86,6 @@ func defaultUnMarshallJSON(m *Money, b []byte) error {
 	return nil
 }
 
-func New(amount Amount, code string) *Money {
-	return &Money{
-		Amount:   amount,
-		Currency: NewCurrency(code).Get(),
-	}
-}
-
 func defaultMarshallJSON(m *Money) ([]byte, error) {
 	if m == nil || m.Currency == nil {
 		return nil, errors.New("Money or Currency is nil")

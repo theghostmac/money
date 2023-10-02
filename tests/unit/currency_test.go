@@ -2,7 +2,7 @@ package unit
 
 import (
 	"fmt"
-	"github.com/theghostmac/money/internal/currency"
+	"github.com/theghostmac/money/pkg/currency"
 	"testing"
 )
 

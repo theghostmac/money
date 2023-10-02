@@ -20,6 +20,10 @@ func (c Currencies) CurrencyByCode(code string) *Currency {
 	return getCurrency
 }
 
+func (c *Currency) Equals(currency *Currency) bool {
+	return c.Code == currency.Code
+}
+
 // Formatter returns a Formatter for the Currency
 func (c *Currency) Formatter() *Formatter {
 	return &Formatter{
