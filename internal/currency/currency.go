@@ -1,6 +1,9 @@
 package currency
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // Add adds a new Currency to the Currencies map
 func (c Currencies) Add(currency *Currency) Currencies {
@@ -27,7 +30,12 @@ func (c *Currency) Formatter() *Formatter {
 }
 
 // AddCurrency adds a new Currency and updates AllCurrencies
-func AddCurrency(code, name, symbol string, decimal int) *Currency {
+func AddCurrency(code, name, symbol string, decimal int) (*Currency, error) {
+	upperCode := strings.ToUpper(code)
+	if AllCurrencies.CurrencyByCode(upperCode) != nil {
+		return nil, fmt.Errorf("currency code '%s' already exists", upperCode)
+	}
+
 	newCurrency := Currency{
 		Code:     code,
 		Name:     name,
@@ -36,7 +44,7 @@ func AddCurrency(code, name, symbol string, decimal int) *Currency {
 	}
 
 	AllCurrencies.Add(&newCurrency)
-	return &newCurrency
+	return &newCurrency, nil
 }
 
 // NewCurrency returns a new Currency for the given code
